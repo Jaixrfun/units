@@ -1,0 +1,9 @@
+# ----------------------------------
+# Argon Images Repository
+# ----------------------------------
+
+images:
+  # Games
+  - name: PaperMC
+    context: argon/unit:v2
+    src: games/papermc.json
