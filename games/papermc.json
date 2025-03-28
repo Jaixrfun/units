@@ -19,7 +19,7 @@
   "installScript": {
     "dockerImage": "ghcr.io/argon-foss/images:debian",
     "entrypoint": "bash",
-    "script": "wget https://api.papermc.io/v2/projects/paper/versions/1.21.4/builds/212/downloads/paper-1.21.4-221.jar"
+    "script": "wget https://api.papermc.io/v2/projects/paper/versions/1.21.4/builds/221/downloads/paper-1.21.4-221.jar"
   },
   "startup": {
     "userEditable": false
