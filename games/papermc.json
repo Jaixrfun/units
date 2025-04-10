@@ -9,7 +9,7 @@
     {
       "name": "jarfile",
       "description": "",
-      "defaultValue": "paper-1.21.4-221.jar",
+      "defaultValue": "server.jar",
       "required": true,
       "userViewable": true,
       "userEditable": true,
@@ -19,7 +19,7 @@
   "installScript": {
     "dockerImage": "ghcr.io/argon-foss/images:debian",
     "entrypoint": "bash",
-    "script": "wget https://api.papermc.io/v2/projects/paper/versions/1.21.4/builds/221/downloads/paper-1.21.4-221.jar"
+    "script": "LATEST_VERSION=$(curl -s https://api.papermc.io/v2/projects/paper | jq -r '.versions[-1]') && LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/paper/versions/$LATEST_VERSION | jq -r '.builds[-1]') && JAR_NAME=paper-$LATEST_VERSION-$LATEST_BUILD.jar && wget -O server.jar https://api.papermc.io/v2/projects/paper/versions/$LATEST_VERSION/builds/$LATEST_BUILD/downloads/$JAR_NAME && echo \"Downloaded PaperMC $LATEST_VERSION build $LATEST_BUILD as server.jar\""
   },
   "startup": {
     "userEditable": false
