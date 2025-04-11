@@ -1,0 +1,27 @@
+{
+"name": "FoliaMC",
+"shortName": "foliamc",
+"description": "The FoliaMC server software for Minecraft: Java Edition.",
+"dockerImage": "ghcr.io/argon-foss/images:java_21",
+"defaultStartupCommand": "java -jar %jarfile%",
+"configFiles": [],
+"environmentVariables": [
+{
+"name": "jarfile",
+"description": "",
+"defaultValue": "server.jar",
+"required": true,
+"userViewable": true,
+"userEditable": true,
+"rules": "string"
+}
+],
+"installScript": {
+"dockerImage": "ghcr.io/argon-foss/images:alpine",
+"entrypoint": "bash",
+"script": "PROJECT=folia && cd /mnt/server && VER=$(curl -s https://api.papermc.io/v2/projects/$PROJECT | jq -r '.versions[-1]') && BUILD=$(curl -s https://api.papermc.io/v2/projects/$PROJECT/versions/$VER | jq -r '.builds[-1]') && JAR=$PROJECT-$VER-$BUILD.jar && curl -o server.jar https://api.papermc.io/v2/projects/$PROJECT/versions/$VER/builds/$BUILD/downloads/$JAR"
+},
+"startup": {
+"userEditable": false
+}
+}
