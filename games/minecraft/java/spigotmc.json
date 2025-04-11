@@ -19,8 +19,7 @@
 "installScript": {
 "dockerImage": "ghcr.io/argon-foss/images:alpine",
 "entrypoint": "bash",
-"script": "mkdir -p /mnt/server && cd /mnt/server && curl -Lo BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar && java -jar BuildTools.jar --rev latest && mv spigot-*.jar server.jar && echo "Downloaded latest Spigot as server.jar"
-"
+"script": "mkdir -p /mnt/server && cd /mnt/server && curl -Lo BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar && java -jar BuildTools.jar --rev latest && mv spigot-*.jar server.jar"
 },
 "startup": {
 "userEditable": false
