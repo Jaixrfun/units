@@ -1,0 +1,28 @@
+{
+"name": "SpigotMC",
+"shortName": "spigotmc",
+"description": "The PurperMC server software for Minecraft: Java Edition.",
+"dockerImage": "ghcr.io/argon-foss/images:java_21",
+"defaultStartupCommand": "java -jar %jarfile%",
+"configFiles": [],
+"environmentVariables": [
+{
+"name": "jarfile",
+"description": "",
+"defaultValue": "server.jar",
+"required": true,
+"userViewable": true,
+"userEditable": true,
+"rules": "string"
+}
+],
+"installScript": {
+"dockerImage": "ghcr.io/argon-foss/images:alpine",
+"entrypoint": "bash",
+"script": "mkdir -p /mnt/server && cd /mnt/server && curl -Lo BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar && java -jar BuildTools.jar --rev latest && mv spigot-*.jar server.jar && echo "Downloaded latest Spigot as server.jar"
+"
+},
+"startup": {
+"userEditable": false
+}
+}
