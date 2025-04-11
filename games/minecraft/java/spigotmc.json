@@ -1,7 +1,7 @@
 {
 "name": "SpigotMC",
 "shortName": "spigotmc",
-"description": "The PurperMC server software for Minecraft: Java Edition.",
+"description": "The SpigotMC server software for Minecraft: Java Edition.",
 "dockerImage": "ghcr.io/argon-foss/images:java_21",
 "defaultStartupCommand": "java -jar %jarfile%",
 "configFiles": [],
