@@ -1,28 +1,27 @@
 {
-"name": "FabricMC",
-"shortName": "fabricmc",
-"description": "The FabricMC server software for Minecraft: Java Edition.",
-"dockerImage": "ghcr.io/argon-foss/images:java_21",
-"defaultStartupCommand": "java -jar %jarfile%",
-"configFiles": [],
-"environmentVariables": [
-{
-"name": "jarfile",
-"description": "",
-"defaultValue": "server.jar",
-"required": true,
-"userViewable": true,
-"userEditable": true,
-"rules": "string"
-}
-],
-"installScript": {
-"dockerImage": "ghcr.io/argon-foss/images:alpine",
-"entrypoint": "bash",
-"script": "MC_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/game | jq -r '.[] | select(.stable==true) | .version' | head -n1) && FABRIC_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/installer | jq -r '.[0].version') && LOADER_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/loader | jq -r '.[] | select(.stable==true) | .version' | head -n1) && cd /mnt/server && wget -O fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-installer/$FABRIC_VERSION/fabric-installer-$FABRIC_VERSION.jar && java -jar fabric-installer.jar server -mcversion $MC_VERSION -loader $LOADER_VERSION -downloadMinecraft && mv server.jar minecraft-server.jar && mv fabric-server-launch.jar server.jar && echo "serverJar=minecraft-server.jar" > fabric-server-launcher.properties && echo "Installed FabricMC $MC_VERSION with loader $LOADER_VERSION"""
-
-},
-"startup": {
-"userEditable": false
-}
+  "name": "FabricMC",
+  "shortName": "fabricmc",
+  "description": "The FabricMC server software for Minecraft: Java Edition.",
+  "dockerImage": "ghcr.io/argon-foss/images:java_21",
+  "defaultStartupCommand": "java -jar %jarfile%",
+  "configFiles": [],
+  "environmentVariables": [
+    {
+      "name": "jarfile",
+      "description": "",
+      "defaultValue": "server.jar",
+      "required": true,
+      "userViewable": true,
+      "userEditable": true,
+      "rules": "string"
+    }
+  ],
+  "installScript": {
+    "dockerImage": "ghcr.io/argon-foss/images:alpine",
+    "entrypoint": "bash",
+    "script": "MC_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/game | jq -r '.[] | select(.stable==true) | .version' | head -n1) && FABRIC_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/installer | jq -r '.[0].version') && LOADER_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/loader | jq -r '.[] | select(.stable==true) | .version' | head -n1) && cd /mnt/server && wget -O fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-installer/$FABRIC_VERSION/fabric-installer-$FABRIC_VERSION.jar && java -jar fabric-installer.jar server -mcversion $MC_VERSION -loader $LOADER_VERSION -downloadMinecraft && mv server.jar minecraft-server.jar && mv fabric-server-launch.jar server.jar && echo \"serverJar=minecraft-server.jar\" > fabric-server-launcher.properties && echo \"Installed FabricMC $MC_VERSION with loader $LOADER_VERSION\""
+  },
+  "startup": {
+    "userEditable": false
+  }
 }
