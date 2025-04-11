@@ -19,7 +19,7 @@
 "installScript": {
 "dockerImage": "ghcr.io/argon-foss/images:alpine",
 "entrypoint": "bash",
-"script": "LATEST_VERSION=$(curl -s https://api.purpurmc.org/v2/purpur | jq -r '.versions[-1]') && LATEST_BUILD=$(curl -s https://api.purpurmc.org/v2/purpur/$LATEST_VERSION | jq -r '.builds.latest') && JAR_NAME=purpur-$LATEST_VERSION-$LATEST_BUILD.jar && wget -O server.jar https://api.purpurmc.org/v2/purpur/$LATEST_VERSION/$LATEST_BUILD/download""
+"script": "LATEST_VERSION=$(curl -s https://api.purpurmc.org/v2/purpur | jq -r '.versions[-1]') && LATEST_BUILD=$(curl -s https://api.purpurmc.org/v2/purpur/$LATEST_VERSION | jq -r '.builds.latest') && JAR_NAME=purpur-$LATEST_VERSION-$LATEST_BUILD.jar && wget -O server.jar https://api.purpurmc.org/v2/purpur/$LATEST_VERSION/$LATEST_BUILD/download"
 },
 "startup": {
 "userEditable": false
