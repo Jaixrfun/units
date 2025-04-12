@@ -1,0 +1,27 @@
+{
+  "name": "BedrockVanilla",
+  "shortName": "bedrockvanilla",
+  "description": "Vanilla Bedrock server for Minecraft: Bedrock Edition.",
+  "dockerImage": "ghcr.io/argon-foss/images:alpine",
+  "defaultStartupCommand": "./bedrock_server",
+  "configFiles": [],
+  "environmentVariables": [
+    {
+      "name": "jarfile",
+      "description": "",
+      "defaultValue": "bedrock_server",
+      "required": true,
+      "userViewable": true,
+      "userEditable": true,
+      "rules": "string"
+    }
+  ],
+  "installScript": {
+    "dockerImage": "ghcr.io/argon-foss/images:alpine",
+    "entrypoint": "bash",
+    "script": "apt update && apt install -y zip unzip wget curl && mkdir -p /mnt/server && cd /mnt/server && RANDVERSION=$(echo $((1 + $RANDOM % 4000))) && echo \"Downloading latest Bedrock server\" && curl -L -A \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RANDVERSION.212 Safari/537.36\" -H \"Accept-Language: en\" -H \"Accept-Encoding: gzip, deflate\" -o versions.html.gz https://www.minecraft.net/en-us/download/server/bedrock && DOWNLOAD_URL=$(zgrep -o 'https://minecraft.azureedge.net/bin-linux/[^\\\"]*' versions.html.gz) && DOWNLOAD_FILE=$(echo ${DOWNLOAD_URL} | cut -d\"/\" -f5) && echo \"Backing up config files\" && rm -f *.bak versions.html.gz && cp server.properties server.properties.bak 2>/dev/null || true && cp permissions.json permissions.json.bak 2>/dev/null || true && cp allowlist.json allowlist.json.bak 2>/dev/null || true && echo \"Downloading files from: $DOWNLOAD_URL\" && curl -L -A \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RANDVERSION.212 Safari/537.36\" -H \"Accept-Language: en\" -o $DOWNLOAD_FILE $DOWNLOAD_URL && echo \"Unpacking server files\" && unzip -o $DOWNLOAD_FILE && echo \"Cleaning up after installing\" && rm -f $DOWNLOAD_FILE && echo \"Restoring backup config files\" && cp -rf server.properties.bak server.properties 2>/dev/null || true && cp -rf permissions.json.bak permissions.json 2>/dev/null || true && cp -rf allowlist.json.bak allowlist.json 2>/dev/null || true && chmod +x bedrock_server && echo \"Install Completed\""
+  },
+  "startup": {
+    "userEditable": false
+  }
+}
