@@ -1,0 +1,27 @@
+{
+  "name": "ForgeMC",
+  "shortName": "forgemc",
+  "description": "The Forge server software for Minecraft: Java Edition.",
+  "dockerImage": "ghcr.io/argon-foss/images:java_21",
+  "defaultStartupCommand": "java -jar %jarfile%",
+  "configFiles": [],
+  "environmentVariables": [
+    {
+      "name": "jarfile",
+      "description": "",
+      "defaultValue": "server.jar",
+      "required": true,
+      "userViewable": true,
+      "userEditable": true,
+      "rules": "string"
+    }
+  ],
+  "installScript": {
+    "dockerImage": "ghcr.io/argon-foss/images:alpine",
+    "entrypoint": "bash",
+    "script": "cd /mnt/server && VER=$(curl -s https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json | grep -oP '\"latest\":\\s*\"\\K[^\"]+' | head -1) && curl -sLO https://maven.minecraftforge.net/net/minecraftforge/forge/$VER/forge-$VER-installer.jar && java -jar forge-$VER-installer.jar --installServer && mv forge-*-universal.jar server.jar"
+  },
+  "startup": {
+    "userEditable": false
+  }
+}
