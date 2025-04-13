@@ -19,7 +19,7 @@
   "installScript": {
     "dockerImage": "ghcr.io/argon-foss/images:alpine",
     "entrypoint": "bash",
-    "script": "cd /mnt/server && VER=$(curl -s https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json | grep -oP '\"latest\":\\s*\"\\K[^\"]+' | head -1) && curl -sLO https://maven.minecraftforge.net/net/minecraftforge/forge/$VER/forge-$VER-installer.jar && java -jar forge-$VER-installer.jar --installServer && mv forge-*-universal.jar server.jar"
+    "script": "cd /mnt/server\nVER=$(curl -s https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json | grep -oP '\"latest\":\\s*\"\\K[^\"]+' | head -1)\ncurl -sLO https://maven.minecraftforge.net/net/minecraftforge/forge/$VER/forge-$VER-installer.jar\njava -jar forge-$VER-installer.jar --installServer\nmv forge-*-universal.jar server.jar"
   },
   "startup": {
     "userEditable": false
